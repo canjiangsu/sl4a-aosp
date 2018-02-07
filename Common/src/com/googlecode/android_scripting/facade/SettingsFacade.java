@@ -228,21 +228,21 @@ public class SettingsFacade extends RpcReceiver {
     @Rpc(description = "Set a string password to the device.")
     public void setDevicePassword(@RpcParameter(name = "password") String password) {
         // mLockPatternUtils.setLockPatternEnabled(true, UserHandle.myUserId());
-        mLockPatternUtils.setLockScreenDisabled(false, UserHandle.myUserId());
+        mLockPatternUtils.setLockScreenDisabled(false);
         mLockPatternUtils.setCredentialRequiredToDecrypt(true);
-        mLockPatternUtils.saveLockPassword(password, null,
-                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, UserHandle.myUserId());
+        mLockPatternUtils.saveLockPassword(password,
+                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, false, UserHandle.myUserId());
     }
 
     @Rpc(description = "Disable screen lock password on the device.")
     public void disableDevicePassword() {
         mLockPatternUtils.clearEncryptionPassword();
         // mLockPatternUtils.setLockPatternEnabled(false, UserHandle.myUserId());
-        mLockPatternUtils.setLockScreenDisabled(true, UserHandle.myUserId());
+        mLockPatternUtils.setLockScreenDisabled(true);
         mLockPatternUtils.setCredentialRequiredToDecrypt(false);
         mLockPatternUtils.clearEncryptionPassword();
-        mLockPatternUtils.clearLock(UserHandle.myUserId());
-        mLockPatternUtils.setLockScreenDisabled(true, UserHandle.myUserId());
+        mLockPatternUtils.clearLock(false);
+        mLockPatternUtils.setLockScreenDisabled(true);
     }
 
     @Rpc(description = "Set the system time in epoch.")

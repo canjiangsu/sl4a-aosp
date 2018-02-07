@@ -38,7 +38,7 @@ import com.googlecode.android_scripting.facade.bluetooth.BluetoothHspFacade;
 import com.googlecode.android_scripting.facade.bluetooth.BluetoothHfpClientFacade;
 import com.googlecode.android_scripting.facade.bluetooth.BluetoothA2dpFacade;
 import com.googlecode.android_scripting.facade.bluetooth.BluetoothLeAdvertiseFacade;
-import com.googlecode.android_scripting.facade.bluetooth.BluetoothLeScanFacade;
+//import com.googlecode.android_scripting.facade.bluetooth.BluetoothLeScanFacade;
 import com.googlecode.android_scripting.facade.bluetooth.BluetoothMapFacade;
 import com.googlecode.android_scripting.facade.bluetooth.BluetoothRfcommFacade;
 import com.googlecode.android_scripting.facade.bluetooth.GattClientFacade;
@@ -46,22 +46,22 @@ import com.googlecode.android_scripting.facade.bluetooth.GattServerFacade;
 import com.googlecode.android_scripting.facade.media.AudioManagerFacade;
 import com.googlecode.android_scripting.facade.media.MediaPlayerFacade;
 import com.googlecode.android_scripting.facade.media.MediaRecorderFacade;
-import com.googlecode.android_scripting.facade.media.MediaScannerFacade;
+//import com.googlecode.android_scripting.facade.media.MediaScannerFacade;
 import com.googlecode.android_scripting.facade.media.MediaSessionFacade;
-import com.googlecode.android_scripting.facade.telephony.CarrierConfigFacade;
-import com.googlecode.android_scripting.facade.telephony.ImsManagerFacade;
+//import com.googlecode.android_scripting.facade.telephony.CarrierConfigFacade;
+//import com.googlecode.android_scripting.facade.telephony.ImsManagerFacade;
 import com.googlecode.android_scripting.facade.telephony.SmsFacade;
 import com.googlecode.android_scripting.facade.telephony.SubscriptionManagerFacade;
-import com.googlecode.android_scripting.facade.telephony.TelecomCallFacade;
-import com.googlecode.android_scripting.facade.telephony.TelecomManagerFacade;
+//import com.googlecode.android_scripting.facade.telephony.TelecomCallFacade;
+//import com.googlecode.android_scripting.facade.telephony.TelecomManagerFacade;
 import com.googlecode.android_scripting.facade.telephony.TelephonyManagerFacade;
 import com.googlecode.android_scripting.facade.ui.UiFacade;
 import com.googlecode.android_scripting.facade.wifi.HttpFacade;
 import com.googlecode.android_scripting.facade.wifi.WifiManagerFacade;
-import com.googlecode.android_scripting.facade.wifi.WifiNanManagerFacade;
+//import com.googlecode.android_scripting.facade.wifi.WifiNanManagerFacade;
 import com.googlecode.android_scripting.facade.wifi.WifiP2pManagerFacade;
 import com.googlecode.android_scripting.facade.wifi.WifiRttManagerFacade;
-import com.googlecode.android_scripting.facade.wifi.WifiScannerFacade;
+//import com.googlecode.android_scripting.facade.wifi.WifiScannerFacade;
 import com.googlecode.android_scripting.jsonrpc.RpcReceiver;
 import com.googlecode.android_scripting.rpc.MethodDescriptor;
 import com.googlecode.android_scripting.rpc.RpcDeprecated;
@@ -93,13 +93,13 @@ public class FacadeConfiguration {
         sFacadeClassList.add(CommonIntentsFacade.class);
         sFacadeClassList.add(ContactsFacade.class);
         sFacadeClassList.add(EventFacade.class);
-        sFacadeClassList.add(ImsManagerFacade.class);
+        //sFacadeClassList.add(ImsManagerFacade.class);
         sFacadeClassList.add(LocationFacade.class);
         sFacadeClassList.add(TelephonyManagerFacade.class);
         sFacadeClassList.add(PreferencesFacade.class);
         sFacadeClassList.add(MediaPlayerFacade.class);
         sFacadeClassList.add(MediaRecorderFacade.class);
-        sFacadeClassList.add(MediaScannerFacade.class);
+        //sFacadeClassList.add(MediaScannerFacade.class);
         sFacadeClassList.add(MediaSessionFacade.class);
         sFacadeClassList.add(SensorManagerFacade.class);
         sFacadeClassList.add(SettingsFacade.class);
@@ -121,23 +121,23 @@ public class FacadeConfiguration {
         sFacadeClassList.add(BluetoothRfcommFacade.class);
         sFacadeClassList.add(WebCamFacade.class);
         sFacadeClassList.add(WifiP2pManagerFacade.class);
-        sFacadeClassList.add(BluetoothLeScanFacade.class);
+        //sFacadeClassList.add(BluetoothLeScanFacade.class);
         sFacadeClassList.add(BluetoothLeAdvertiseFacade.class);
         sFacadeClassList.add(GattClientFacade.class);
         sFacadeClassList.add(GattServerFacade.class);
         sFacadeClassList.add(ConnectivityManagerFacade.class);
         sFacadeClassList.add(DisplayFacade.class);
-        sFacadeClassList.add(TelecomManagerFacade.class);
+        //sFacadeClassList.add(TelecomManagerFacade.class);
         sFacadeClassList.add(WifiRttManagerFacade.class);
-        sFacadeClassList.add(WifiScannerFacade.class);
+        //sFacadeClassList.add(WifiScannerFacade.class);
         sFacadeClassList.add(SubscriptionManagerFacade.class);
-        sFacadeClassList.add(TelecomCallFacade.class);
-        sFacadeClassList.add(CarrierConfigFacade.class);
+        //sFacadeClassList.add(TelecomCallFacade.class);
+        //sFacadeClassList.add(CarrierConfigFacade.class);
 
         /*Compatibility reset to >= Marshmallow */
         if( sSdkLevel >= 23 ) {
             //add new facades here
-            sFacadeClassList.add(WifiNanManagerFacade.class);
+            //sFacadeClassList.add(WifiNanManagerFacade.class);
             sFacadeClassList.add(BluetoothHfpClientFacade.class);
         }
 

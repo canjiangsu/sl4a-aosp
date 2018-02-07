@@ -53,7 +53,7 @@ public class BluetoothFacade extends RpcReceiver {
     private final IntentFilter discoveryFilter;
     private final EventFacade mEventFacade;
     private final BluetoothStateReceiver mStateReceiver;
-    private final BleStateReceiver mBleStateReceiver;
+    //private final BleStateReceiver mBleStateReceiver;
     private Map<String, BluetoothConnection> connections =
             new HashMap<String, BluetoothConnection>();
     private BluetoothAdapter mBluetoothAdapter;
@@ -76,7 +76,7 @@ public class BluetoothFacade extends RpcReceiver {
         discoveryFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         mDiscoveryReceiver = new DiscoveryCacheReceiver();
         mStateReceiver = new BluetoothStateReceiver();
-        mBleStateReceiver = new BleStateReceiver();
+        //mBleStateReceiver = new BleStateReceiver();
     }
 
     class DiscoveryCacheReceiver extends BroadcastReceiver {
@@ -121,7 +121,7 @@ public class BluetoothFacade extends RpcReceiver {
             }
         }
     }
-
+/*
     class BleStateReceiver extends BroadcastReceiver {
 
         @Override
@@ -139,7 +139,7 @@ public class BluetoothFacade extends RpcReceiver {
             }
         }
     }
-
+*/
 
     public static boolean deviceMatch(BluetoothDevice device, String deviceID) {
         return deviceID.equals(device.getAliasName()) || deviceID.equals(device.getAddress());
@@ -342,7 +342,7 @@ public class BluetoothFacade extends RpcReceiver {
         }
         return energyInfo.toString();
     }
-
+/*
     @Rpc(description = "Return true if hardware has entries" +
             "available for matching beacons.")
     public boolean bluetoothIsHardwareTrackingFiltersAvailable() {
@@ -353,7 +353,6 @@ public class BluetoothFacade extends RpcReceiver {
     public int bluetoothGetLeState() {
         return mBluetoothAdapter.getLeState();
     }
-
     @Rpc(description = "Enables BLE functionalities.")
     public boolean bluetoothEnableBLE() {
         mService.registerReceiver(mBleStateReceiver,
@@ -367,7 +366,7 @@ public class BluetoothFacade extends RpcReceiver {
             new IntentFilter(BluetoothAdapter.ACTION_BLE_STATE_CHANGED));
         return mBluetoothAdapter.disableBLE();
     }
-
+*/
     @Override
     public void shutdown() {
         for (Map.Entry<String, BluetoothConnection> entry : connections.entrySet()) {

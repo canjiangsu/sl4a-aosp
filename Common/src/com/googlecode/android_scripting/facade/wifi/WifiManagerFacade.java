@@ -294,9 +294,9 @@ public class WifiManagerFacade extends RpcReceiver {
         if (j.has("priority")) {
             config.priority = j.getInt("priority");
         }
-        if (j.has("apBand")) {
+        /*if (j.has("apBand")) {
             config.apBand = j.getInt("apBand");
-        }
+        }*/
         if (j.has("preSharedKey")) {
             config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
             config.preSharedKey = j.getString("preSharedKey");
@@ -333,9 +333,10 @@ public class WifiManagerFacade extends RpcReceiver {
         if (j.has("FQDN")) {
             config.FQDN = j.getString("FQDN");
         }
-        if (j.has("providerFriendlyName")) {
+        /*if (j.has("providerFriendlyName")) {
             config.providerFriendlyName = j.getString("providerFriendlyName");
-        }
+        }*/
+        /*
         if (j.has("roamingConsortiumIds")) {
             JSONArray ids = j.getJSONArray("roamingConsortiumIds");
             long[] rIds = new long[ids.length()];
@@ -343,7 +344,7 @@ public class WifiManagerFacade extends RpcReceiver {
                 rIds[i] = ids.getLong(i);
             }
             config.roamingConsortiumIds = rIds;
-        }
+        }*/
         WifiEnterpriseConfig eConfig = new WifiEnterpriseConfig();
         if (j.has(WifiEnterpriseConfig.EAP_KEY)) {
             int eap = j.getInt(WifiEnterpriseConfig.EAP_KEY);
@@ -380,21 +381,21 @@ public class WifiManagerFacade extends RpcReceiver {
             Log.v("Setting password to " + pwd);
             eConfig.setPassword(pwd);
         }
-        if (j.has(WifiEnterpriseConfig.ALTSUBJECT_MATCH_KEY)) {
+        /*if (j.has(WifiEnterpriseConfig.ALTSUBJECT_MATCH_KEY)) {
             String altSub = j.getString(WifiEnterpriseConfig.ALTSUBJECT_MATCH_KEY);
             Log.v("Setting Alt Subject to " + altSub);
             eConfig.setAltSubjectMatch(altSub);
-        }
-        if (j.has(WifiEnterpriseConfig.DOM_SUFFIX_MATCH_KEY)) {
+        }*/
+        /*if (j.has(WifiEnterpriseConfig.DOM_SUFFIX_MATCH_KEY)) {
             String domSuffix = j.getString(WifiEnterpriseConfig.DOM_SUFFIX_MATCH_KEY);
             Log.v("Setting Domain Suffix Match to " + domSuffix);
             eConfig.setDomainSuffixMatch(domSuffix);
-        }
-        if (j.has(WifiEnterpriseConfig.REALM_KEY)) {
+        }*/
+        /*if (j.has(WifiEnterpriseConfig.REALM_KEY)) {
             String realm = j.getString(WifiEnterpriseConfig.REALM_KEY);
             Log.v("Setting Domain Suffix Match to " + realm);
             eConfig.setRealm(realm);
-        }
+        }*/
         config.enterpriseConfig = eConfig;
         return config;
     }
@@ -482,7 +483,7 @@ public class WifiManagerFacade extends RpcReceiver {
         return mWifi.addNetwork(genWifiConfig(wifiConfig));
     }
 
-    @Rpc(description = "Builds a WifiConfiguration from Hotspot 2.0 MIME file.")
+   /* @Rpc(description = "Builds a WifiConfiguration from Hotspot 2.0 MIME file.")
     public WifiConfiguration wifiBuildConfig(
             @RpcParameter(name = "uriString") String uriString,
             @RpcParameter(name = "mimeType") String mimeType,
@@ -490,7 +491,7 @@ public class WifiManagerFacade extends RpcReceiver {
                     throws JSONException {
         byte[] data = base64StrToBytes(dataString);
         return mWifi.buildWifiConfig(uriString, mimeType, data);
-    }
+    }*/
 
     @Rpc(description = "Cancel Wi-fi Protected Setup.")
     public void wifiCancelWps() throws JSONException {
@@ -531,10 +532,10 @@ public class WifiManagerFacade extends RpcReceiver {
         return mWifi.disconnect();
     }
 
-    @Rpc(description = "Enable/disable autojoin scan and switch network when connected.")
+    /*@Rpc(description = "Enable/disable autojoin scan and switch network when connected.")
     public Boolean wifiSetEnableAutoJoinWhenAssociated(@RpcParameter(name = "enable") Boolean enable) {
         return mWifi.setEnableAutoJoinWhenAssociated(enable);
-    }
+    }*/
 
     @Rpc(description = "Enable a configured network. Initiate a connection if disableOthers is true", returns = "True if the operation succeeded.")
     public Boolean wifiEnableNetwork(@RpcParameter(name = "netId") Integer netId,
@@ -547,7 +548,7 @@ public class WifiManagerFacade extends RpcReceiver {
         mWifi.enableVerboseLogging(level);
     }
 
-    @Rpc(description = "Connect to a wifi network that uses Enterprise authentication methods.")
+   /* @Rpc(description = "Connect to a wifi network that uses Enterprise authentication methods.")
     public void wifiEnterpriseConnect(@RpcParameter(name = "config") JSONObject config)
             throws JSONException, GeneralSecurityException {
         // Create Certificate
@@ -561,12 +562,12 @@ public class WifiManagerFacade extends RpcReceiver {
             Log.d("Got a non-passpoint enterprise config, connect directly.");
             mWifi.connect(wifiConfig, listener);
         }
-    }
+    }*/
 
-    @Rpc(description = "Resets all WifiManager settings.")
+    /*@Rpc(description = "Resets all WifiManager settings.")
     public void wifiFactoryReset() {
         mWifi.factoryReset();
-    }
+    }*/
 
     /**
      * Forget a wifi network with priority
@@ -604,25 +605,25 @@ public class WifiManagerFacade extends RpcReceiver {
         return mWifi.getControllerActivityEnergyInfo(0);
     }
 
-    @Rpc(description = "Get the country code used by WiFi.")
+    /*@Rpc(description = "Get the country code used by WiFi.")
     public String wifiGetCountryCode() {
         return mWifi.getCountryCode();
-    }
+    }*/
 
-    @Rpc(description = "Get the current network.")
+    /*@Rpc(description = "Get the current network.")
     public Network wifiGetCurrentNetwork() {
         return mWifi.getCurrentNetwork();
-    }
+    }*/
 
     @Rpc(description = "Get the info from last successful DHCP request.")
     public DhcpInfo wifiGetDhcpInfo() {
         return mWifi.getDhcpInfo();
     }
 
-    @Rpc(description = "Get setting for Framework layer autojoin enable status.")
+    /*@Rpc(description = "Get setting for Framework layer autojoin enable status.")
     public Boolean wifiGetEnableAutoJoinWhenAssociated() {
         return mWifi.getEnableAutoJoinWhenAssociated();
-    }
+    }*/
 
     @Rpc(description = "Get privileged configured networks.")
     public List<WifiConfiguration> wifiGetPrivilegedConfiguredNetworks() {
@@ -863,11 +864,11 @@ public class WifiManagerFacade extends RpcReceiver {
         return false;
     }
 
-    @Rpc(description = "Enable/disable WifiConnectivityManager.")
+    /*@Rpc(description = "Enable/disable WifiConnectivityManager.")
     public void wifiEnableWifiConnectivityManager(
             @RpcParameter(name = "enable") Boolean enable) {
         mWifi.enableWifiConnectivityManager(enable);
-    }
+    }*/
 
     @Override
     public void shutdown() {

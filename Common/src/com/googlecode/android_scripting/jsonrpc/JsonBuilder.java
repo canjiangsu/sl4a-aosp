@@ -50,25 +50,25 @@ import android.net.DhcpInfo;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.net.wifi.RttManager.RttCapabilities;
+//import android.net.wifi.RttManager.RttCapabilities;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiActivityEnergyInfo;
 import android.net.wifi.WifiChannel;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiScanner.ScanData;
+//import android.net.wifi.WifiScanner.ScanData;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.os.Bundle;
 import android.os.ParcelUuid;
 import android.telecom.Call;
-import android.telecom.CallAudioState;
+//import android.telecom.CallAudioState;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.VideoProfile;
-import android.telecom.VideoProfile.CameraCapabilities;
+//import android.telecom.VideoProfile.CameraCapabilities;
 import android.telephony.CellIdentityCdma;
 import android.telephony.CellIdentityGsm;
 import android.telephony.CellIdentityLte;
@@ -82,7 +82,7 @@ import android.telephony.CellSignalStrengthCdma;
 import android.telephony.CellSignalStrengthGsm;
 import android.telephony.CellSignalStrengthLte;
 import android.telephony.CellSignalStrengthWcdma;
-import android.telephony.ModemActivityInfo;
+//import android.telephony.ModemActivityInfo;
 import android.telephony.NeighboringCellInfo;
 import android.telephony.SmsMessage;
 import android.telephony.SignalStrength;
@@ -97,7 +97,7 @@ import com.googlecode.android_scripting.ConvertUtils;
 import com.googlecode.android_scripting.Log;
 import com.googlecode.android_scripting.event.Event;
 //FIXME: Refactor classes, constants and conversions out of here
-import com.googlecode.android_scripting.facade.telephony.InCallServiceImpl;
+//import com.googlecode.android_scripting.facade.telephony.InCallServiceImpl;
 import com.googlecode.android_scripting.facade.telephony.TelephonyUtils;
 import com.googlecode.android_scripting.facade.telephony.TelephonyConstants;
 
@@ -149,9 +149,10 @@ public class JsonBuilder {
         if (data instanceof Address) {
             return buildJsonAddress((Address) data);
         }
+        /*
         if (data instanceof CallAudioState) {
             return buildJsonAudioState((CallAudioState) data);
-        }
+        }*/
         if (data instanceof Location) {
             return buildJsonLocation((Location) data);
         }
@@ -175,9 +176,10 @@ public class JsonBuilder {
         if (data instanceof ScanResult) {
             return buildJsonScanResult((ScanResult) data);
         }
+        /*
         if (data instanceof ScanData) {
             return buildJsonScanData((ScanData) data);
-        }
+        }*/
         if (data instanceof android.bluetooth.le.ScanResult) {
             return buildJsonBleScanResult((android.bluetooth.le.ScanResult) data);
         }
@@ -244,9 +246,10 @@ public class JsonBuilder {
         if (data instanceof DisplayMetrics) {
             return buildDisplayMetrics((DisplayMetrics) data);
         }
+        /*
         if (data instanceof RttCapabilities) {
             return buildRttCapabilities((RttCapabilities) data);
-        }
+        }*/
         if (data instanceof WifiActivityEnergyInfo) {
             return buildWifiActivityEnergyInfo((WifiActivityEnergyInfo) data);
         }
@@ -287,27 +290,30 @@ public class JsonBuilder {
         if (data instanceof CellInfoCdma) {
             return buildCellInfoCdma((CellInfoCdma) data);
         }
-        if (data instanceof Call) {
+        /*if (data instanceof Call) {
             return buildCall((Call) data);
-        }
+        }*/
         if (data instanceof Call.Details) {
             return buildCallDetails((Call.Details) data);
         }
+        /*
         if (data instanceof InCallServiceImpl.CallEvent<?>) {
             return buildCallEvent((InCallServiceImpl.CallEvent<?>) data);
         }
         if (data instanceof VideoProfile) {
             return buildVideoProfile((VideoProfile) data);
-        }
+        }*/
+        /*
         if (data instanceof CameraCapabilities) {
             return buildCameraCapabilities((CameraCapabilities) data);
-        }
+        }*/
         if (data instanceof VoLteServiceState) {
             return buildVoLteServiceStateEvent((VoLteServiceState) data);
         }
+        /*
         if (data instanceof ModemActivityInfo) {
             return buildModemActivityInfo((ModemActivityInfo) data);
-        }
+        }*/
         if (data instanceof SignalStrength) {
             return buildSignalStrength((SignalStrength) data);
         }
@@ -317,7 +323,7 @@ public class JsonBuilder {
         // throw new JSONException("Failed to build JSON result. " +
         // data.getClass().getName());
     }
-
+/*
     private static JSONObject buildJsonAudioState(CallAudioState data)
             throws JSONException {
         JSONObject state = new JSONObject();
@@ -325,7 +331,7 @@ public class JsonBuilder {
         state.put("AudioRoute", InCallServiceImpl.getAudioRouteString(data.getRoute()));
         return state;
     }
-
+*/
     private static Object buildDisplayMetrics(DisplayMetrics data)
             throws JSONException {
         JSONObject dm = new JSONObject();
@@ -585,21 +591,21 @@ public class JsonBuilder {
         result.put("capabilities", scanResult.capabilities);
         result.put("timestamp", scanResult.timestamp);
         result.put("blackListTimestamp", scanResult.blackListTimestamp);
-        result.put("centerFreq0", scanResult.centerFreq0);
-        result.put("centerFreq1", scanResult.centerFreq1);
-        result.put("channelWidth", scanResult.channelWidth);
+        //result.put("centerFreq0", scanResult.centerFreq0);
+        //result.put("centerFreq1", scanResult.centerFreq1);
+        //result.put("channelWidth", scanResult.channelWidth);
         result.put("distanceCm", scanResult.distanceCm);
         result.put("distanceSdCm", scanResult.distanceSdCm);
-        result.put("is80211McRTTResponder", scanResult.is80211mcResponder());
+        //result.put("is80211McRTTResponder", scanResult.is80211mcResponder());
         result.put("isAutoJoinCandidate", scanResult.isAutoJoinCandidate);
         result.put("numConnection", scanResult.numConnection);
-        result.put("passpointNetwork", scanResult.isPasspointNetwork());
+        //result.put("passpointNetwork", scanResult.isPasspointNetwork());
         result.put("numIpConfigFailures", scanResult.numIpConfigFailures);
         result.put("numUsage", scanResult.numUsage);
         result.put("seen", scanResult.seen);
         result.put("untrusted", scanResult.untrusted);
-        result.put("operatorFriendlyName", scanResult.operatorFriendlyName);
-        result.put("venueName", scanResult.venueName);
+        //result.put("operatorFriendlyName", scanResult.operatorFriendlyName);
+        //result.put("venueName", scanResult.venueName);
         if (scanResult.informationElements != null) {
             JSONArray infoEles = new JSONArray();
             for (ScanResult.InformationElement ie : scanResult.informationElements) {
@@ -614,7 +620,7 @@ public class JsonBuilder {
         }
         return result;
     }
-
+/*
     private static JSONObject buildJsonScanData(ScanData scanData)
             throws JSONException {
         JSONObject result = new JSONObject();
@@ -627,7 +633,7 @@ public class JsonBuilder {
         result.put("ScanResults", scanResults);
         return result;
     }
-
+*/
     private static JSONObject buildJsonWifiInfo(WifiInfo data)
             throws JSONException {
         JSONObject result = new JSONObject();
@@ -875,7 +881,7 @@ public class JsonBuilder {
         point.put("y", data.y);
         return point;
     }
-
+/*
     private static Object buildRttCapabilities(RttCapabilities data)
             throws JSONException {
         JSONObject cap = new JSONObject();
@@ -887,7 +893,7 @@ public class JsonBuilder {
         cap.put("twoSided11McRttSupported", data.twoSided11McRttSupported);
         return cap;
     }
-
+*/
     private static Object buildSmsMessage(SmsMessage data) throws JSONException {
         JSONObject msg = new JSONObject();
         msg.put("originatingAddress", data.getOriginatingAddress());
@@ -932,8 +938,8 @@ public class JsonBuilder {
         config.put("priority", data.priority);
         config.put("hiddenSSID", data.hiddenSSID);
         config.put("FQDN", data.FQDN);
-        config.put("providerFriendlyName", data.providerFriendlyName);
-        config.put("isPasspoint", data.isPasspoint());
+        //config.put("providerFriendlyName", data.providerFriendlyName);
+        //config.put("isPasspoint", data.isPasspoint());
         config.put("hiddenSSID", data.hiddenSSID);
         if (data.status == WifiConfiguration.Status.CURRENT) {
             config.put("status", "CURRENT");
@@ -951,11 +957,11 @@ public class JsonBuilder {
     private static Object buildWifiEnterpriseConfig(WifiEnterpriseConfig data)
             throws JSONException, CertificateEncodingException {
         JSONObject config = new JSONObject();
-        config.put(WifiEnterpriseConfig.PLMN_KEY, data.getPlmn());
-        config.put(WifiEnterpriseConfig.REALM_KEY, data.getRealm());
+        //config.put(WifiEnterpriseConfig.PLMN_KEY, data.getPlmn());
+        //config.put(WifiEnterpriseConfig.REALM_KEY, data.getRealm());
         config.put(WifiEnterpriseConfig.EAP_KEY, data.getEapMethod());
         config.put(WifiEnterpriseConfig.PHASE2_KEY, data.getPhase2Method());
-        config.put(WifiEnterpriseConfig.ALTSUBJECT_MATCH_KEY, data.getAltSubjectMatch());
+        //config.put(WifiEnterpriseConfig.ALTSUBJECT_MATCH_KEY, data.getAltSubjectMatch());
         X509Certificate caCert = data.getCaCertificate();
         String caCertString = Base64.encodeToString(caCert.getEncoded(), Base64.DEFAULT);
         config.put(WifiEnterpriseConfig.CA_CERT_KEY, caCertString);
@@ -999,7 +1005,7 @@ public class JsonBuilder {
         info.put("groupOwnerAddress", data.groupOwnerAddress);
         return info;
     }
-
+/*
     private static <T> JSONObject buildCallEvent(InCallServiceImpl.CallEvent<T> callEvent)
             throws JSONException {
         JSONObject jsonEvent = new JSONObject();
@@ -1007,7 +1013,7 @@ public class JsonBuilder {
         jsonEvent.put("Event", build(callEvent.getEvent()));
         return jsonEvent;
     }
-
+*/
     private static JSONObject buildUri(Uri uri) throws JSONException {
         return new JSONObject().put("Uri", build((uri != null) ? uri.toString() : ""));
     }
@@ -1017,20 +1023,20 @@ public class JsonBuilder {
         JSONObject callDetails = new JSONObject();
 
         callDetails.put("Handle", buildUri(details.getHandle()));
-        callDetails.put("HandlePresentation",
-                build(InCallServiceImpl.getCallPresentationInfoString(
-                        details.getHandlePresentation())));
+        //callDetails.put("HandlePresentation",
+        //        build(InCallServiceImpl.getCallPresentationInfoString(
+        //                details.getHandlePresentation())));
         callDetails.put("CallerDisplayName", build(details.getCallerDisplayName()));
 
         // TODO AccountHandle
         // callDetails.put("AccountHandle", build(""));
-
+/*
         callDetails.put("Capabilities",
                 build(InCallServiceImpl.getCallCapabilitiesString(details.getCallCapabilities())));
 
         callDetails.put("Properties",
                 build(InCallServiceImpl.getCallPropertiesString(details.getCallProperties())));
-
+*/
         // TODO Parse fields in Disconnect Cause
         callDetails.put("DisconnectCause", build((details.getDisconnectCause() != null) ? details
                 .getDisconnectCause().toString() : ""));
@@ -1038,10 +1044,10 @@ public class JsonBuilder {
 
         // TODO: GatewayInfo
         // callDetails.put("GatewayInfo", build(""));
-
+/*
         callDetails.put("VideoState",
                 build(InCallServiceImpl.getVideoCallStateString(details.getVideoState())));
-
+*/
         // TODO: StatusHints
         // callDetails.put("StatusHints", build(""));
 
@@ -1049,7 +1055,7 @@ public class JsonBuilder {
 
         return callDetails;
     }
-
+/*
     private static JSONObject buildCall(Call call) throws JSONException {
 
         JSONObject callInfo = new JSONObject();
@@ -1077,7 +1083,6 @@ public class JsonBuilder {
 
         return callInfo;
     }
-
     private static JSONObject buildVideoProfile(VideoProfile videoProfile) throws JSONException {
         JSONObject profile = new JSONObject();
 
@@ -1088,7 +1093,6 @@ public class JsonBuilder {
 
         return profile;
     }
-
     private static JSONObject buildCameraCapabilities(CameraCapabilities cameraCapabilities)
             throws JSONException {
         JSONObject capabilities = new JSONObject();
@@ -1100,7 +1104,7 @@ public class JsonBuilder {
 
         return capabilities;
     }
-
+*/
     private static JSONObject buildVoLteServiceStateEvent(
         VoLteServiceState volteInfo)
             throws JSONException {
@@ -1109,7 +1113,7 @@ public class JsonBuilder {
             TelephonyUtils.getSrvccStateString(volteInfo.getSrvccState()));
         return info;
     }
-
+/*
     private static JSONObject buildModemActivityInfo(ModemActivityInfo modemInfo)
             throws JSONException {
         JSONObject info = new JSONObject();
@@ -1127,7 +1131,7 @@ public class JsonBuilder {
         info.put("RxTimeMs", modemInfo.getRxTimeMillis());
         info.put("EnergyUsedMw", modemInfo.getEnergyUsed());
         return info;
-    }
+    }*/
     private static JSONObject buildSignalStrength(SignalStrength signalStrength)
             throws JSONException {
         JSONObject info = new JSONObject();

@@ -23,8 +23,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
-import android.net.ConnectivityManager.PacketKeepaliveCallback;
-import android.net.ConnectivityManager.PacketKeepalive;
+//import android.net.ConnectivityManager.PacketKeepaliveCallback;
+//import android.net.ConnectivityManager.PacketKeepalive;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -95,7 +95,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
             }
         }
     }
-
+/*
     class PacketKeepaliveReceiver extends PacketKeepaliveCallback {
         public static final int EVENT_INVALID = -1;
         public static final int EVENT_NONE = 0;
@@ -159,7 +159,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
             }
         }
     }
-
+*/
     class NetworkCallback extends ConnectivityManager.NetworkCallback {
         public static final int EVENT_INVALID = -1;
         public static final int EVENT_NONE = 0;
@@ -268,7 +268,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
                         TelephonyEvents.NetworkCallbackEvent.INVALID_VALUE));
             }
         }
-
+/*
         @Override
         public void onCapabilitiesChanged(Network network,
                 NetworkCapabilities networkCapabilities) {
@@ -284,7 +284,8 @@ public class ConnectivityManagerFacade extends RpcReceiver {
                         TelephonyEvents.NetworkCallbackEvent.INVALID_VALUE));
             }
         }
-
+*/
+/*
         @Override
         public void onNetworkSuspended(Network network) {
             Log.d("NetworkCallback onNetworkSuspended");
@@ -298,7 +299,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
                         TelephonyEvents.NetworkCallbackEvent.INVALID_VALUE));
             }
         }
-
+*/
         @Override
         public void onLinkPropertiesChanged(Network network,
                 LinkProperties linkProperties) {
@@ -313,7 +314,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
                         TelephonyEvents.NetworkCallbackEvent.INVALID_VALUE));
             }
         }
-
+/*
         @Override
         public void onNetworkResumed(Network network) {
             Log.d("NetworkCallback onNetworkResumed");
@@ -326,7 +327,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
                         TelephonyEvents.NetworkCallbackEvent.INVALID_VALUE,
                         TelephonyEvents.NetworkCallbackEvent.INVALID_VALUE));
             }
-        }
+        }*/
     }
 
     private static int getNetworkCallbackEvent(String event) {
@@ -376,7 +377,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
         }
         return TelephonyConstants.NetworkCallbackInvalid;
     }
-
+/*
     private static int getPacketKeepaliveReceiverEvent(String event) {
         switch (event) {
             case TelephonyConstants.PacketKeepaliveCallbackStarted:
@@ -400,16 +401,16 @@ public class ConnectivityManagerFacade extends RpcReceiver {
         }
         return TelephonyConstants.PacketKeepaliveCallbackInvalid;
     }
-
+*/
     private final ConnectivityManager mManager;
     private final Service mService;
     private final Context mContext;
     private final ConnectivityReceiver mConnectivityReceiver;
     private final EventFacade mEventFacade;
-    private PacketKeepalive mPacketKeepalive;
+    //private PacketKeepalive mPacketKeepalive;
     private NetworkCallback mNetworkCallback;
-    private static HashMap<String, PacketKeepaliveReceiver> mPacketKeepaliveReceiverMap =
-            new HashMap<String, PacketKeepaliveReceiver>();
+    //private static HashMap<String, PacketKeepaliveReceiver> mPacketKeepaliveReceiverMap =
+    //        new HashMap<String, PacketKeepaliveReceiver>();
     private static HashMap<String, NetworkCallback> mNetworkCallbackMap =
             new HashMap<String, NetworkCallback>();
     private boolean mTrackingConnectivityStateChange;
@@ -432,7 +433,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
                     new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
     }
-
+/*
     @Rpc(description = "start natt keep alive")
     public String connectivityStartNattKeepalive(Integer intervalSeconds, String srcAddrString,
             Integer srcPort, String dstAddrString) throws UnknownHostException {
@@ -444,10 +445,10 @@ public class ConnectivityManagerFacade extends RpcReceiver {
             Log.d("startNattKeepalive dstAddr:" + dstAddr.getHostAddress());
             Log.d("startNattKeepalive srcPort:" + srcPort);
             Log.d("startNattKeepalive intervalSeconds:" + intervalSeconds);
-            PacketKeepaliveReceiver mPacketKeepaliveReceiver = new PacketKeepaliveReceiver(
-                    PacketKeepaliveReceiver.EVENT_ALL);
-            mPacketKeepalive = mManager.startNattKeepalive(mNetwork, (int) intervalSeconds,
-                    mPacketKeepaliveReceiver, srcAddr, (int) srcPort, dstAddr);
+            //PacketKeepaliveReceiver mPacketKeepaliveReceiver = new PacketKeepaliveReceiver(
+            //        PacketKeepaliveReceiver.EVENT_ALL);
+            //mPacketKeepalive = mManager.startNattKeepalive(mNetwork, (int) intervalSeconds,
+            //        mPacketKeepaliveReceiver, srcAddr, (int) srcPort, dstAddr);
             if (mPacketKeepalive != null) {
                 mPacketKeepaliveReceiver.mPacketKeepalive = mPacketKeepalive;
                 String key = mPacketKeepaliveReceiver.mId;
@@ -461,8 +462,8 @@ public class ConnectivityManagerFacade extends RpcReceiver {
             Log.e("startNattKeepalive UnknownHostException");
             return null;
         }
-    }
-
+    }*/
+/*
     @Rpc(description = "stop natt keep alive")
     public Boolean connectivityStopNattKeepalive(String key) {
         PacketKeepaliveReceiver mPacketKeepaliveReceiver =
@@ -475,7 +476,8 @@ public class ConnectivityManagerFacade extends RpcReceiver {
             return false;
         }
     }
-
+*/
+/*
     @Rpc(description = "start listening for NattKeepalive Event")
     public Boolean connectivityNattKeepaliveStartListeningForEvent(String key, String eventString) {
         PacketKeepaliveReceiver mPacketKeepaliveReceiver =
@@ -507,7 +509,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
             return false;
         }
     }
-
+*/
     @Rpc(description = "start listening for NetworkCallback Event")
     public Boolean connectivityNetworkCallbackStartListeningForEvent(String key, String eventString) {
         NetworkCallback mNetworkCallback = mNetworkCallbackMap.get(key);
@@ -537,7 +539,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
             return false;
         }
     }
-
+/*
     @Rpc(description = "Set Rssi Threshold Monitor")
     public String connectivitySetRssiThresholdMonitor(Integer rssi) {
         Log.d("SL4A:setRssiThresholdMonitor rssi = " + rssi);
@@ -551,7 +553,7 @@ public class ConnectivityManagerFacade extends RpcReceiver {
         mNetworkCallbackMap.put(key, mNetworkCallback);
         return key;
     }
-
+*/
     @Rpc(description = "Stop Rssi Threshold Monitor")
     public Boolean connectivityStopRssiThresholdMonitor(String key) {
         Log.d("SL4A:stopRssiThresholdMonitor key = " + key);
@@ -566,10 +568,11 @@ public class ConnectivityManagerFacade extends RpcReceiver {
             Log.d("build TransportType" + configJson.getInt("TransportType"));
             builder.addTransportType(configJson.getInt("TransportType"));
         }
+        /*
         if (configJson.has("SignalStrength")) {
             Log.d("build SignalStrength" + configJson.getInt("SignalStrength"));
             builder.setSignalStrength(configJson.getInt("SignalStrength"));
-        }
+        }*/
         if (configJson.has("Capability")) {
             JSONArray capabilities = configJson.getJSONArray("Capability");
             for (int i = 0; i < capabilities.length(); i++) {

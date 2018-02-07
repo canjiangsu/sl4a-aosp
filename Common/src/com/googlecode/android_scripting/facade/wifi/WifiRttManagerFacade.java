@@ -4,9 +4,9 @@ package com.googlecode.android_scripting.facade.wifi;
 import android.app.Service;
 import android.content.Context;
 import android.net.wifi.RttManager;
-import android.net.wifi.RttManager.ResponderCallback;
-import android.net.wifi.RttManager.ResponderConfig;
-import android.net.wifi.RttManager.RttCapabilities;
+//import android.net.wifi.RttManager.ResponderCallback;
+//import android.net.wifi.RttManager.ResponderConfig;
+//import android.net.wifi.RttManager.RttCapabilities;
 import android.net.wifi.RttManager.RttListener;
 import android.net.wifi.RttManager.RttParams;
 import android.net.wifi.RttManager.RttResult;
@@ -36,7 +36,7 @@ public class WifiRttManagerFacade extends RpcReceiver {
     private final RttManager mRtt;
     private final EventFacade mEventFacade;
     private final Map<Integer, RttListener> mRangingListeners;
-    private final Map<Integer, RttResponderCallback> mResponderCallbacks;
+    //private final Map<Integer, RttResponderCallback> mResponderCallbacks;
 
     public WifiRttManagerFacade(FacadeManager manager) {
         super(manager);
@@ -44,7 +44,7 @@ public class WifiRttManagerFacade extends RpcReceiver {
         mRtt = (RttManager) mService.getSystemService(Context.WIFI_RTT_SERVICE);
         mEventFacade = manager.getReceiver(EventFacade.class);
         mRangingListeners = new Hashtable<Integer, RttListener>();
-        mResponderCallbacks = new HashMap<>();
+        //mResponderCallbacks = new HashMap<>();
     }
 
     public static class RangingListener implements RttListener {
@@ -62,7 +62,7 @@ public class WifiRttManagerFacade extends RpcReceiver {
         private Bundle packRttResult(RttResult result) {
             Bundle rttResult = new Bundle();
             rttResult.putString("BSSID", result.bssid);
-            rttResult.putInt("txRate", result.txRate);
+            /*rttResult.putInt("txRate", result.txRate);
             rttResult.putInt("rxRate", result.rxRate);
             rttResult.putInt("distance", result.distance);
             rttResult.putInt("distanceStandardDeviation",
@@ -77,15 +77,15 @@ public class WifiRttManagerFacade extends RpcReceiver {
             rttResult.putInt("rssi", result.rssi);
             rttResult.putInt("rssiSpread", result.rssiSpread);
             rttResult.putInt("retryAfterDuration", result.retryAfterDuration);
-            rttResult.putInt("measurementType", result.measurementType);
+            rttResult.putInt("measurementType", result.measurementType);*/
             rttResult.putInt("status", result.status);
-            rttResult.putInt("frameNumberPerBurstPeer",
+            /*rttResult.putInt("frameNumberPerBurstPeer",
                     result.frameNumberPerBurstPeer);
             rttResult.putInt("successMeasurementFrameNumber",
                     result.successMeasurementFrameNumber);
             rttResult.putInt("measurementFrameNumber",
                     result.measurementFrameNumber);
-            rttResult.putInt("burstNumber", result.burstNumber);
+            rttResult.putInt("burstNumber", result.burstNumber);*/
             rttResult.putInt("status", result.status);
             return rttResult;
         }
@@ -127,7 +127,7 @@ public class WifiRttManagerFacade extends RpcReceiver {
      * A {@link ResponderCallback} that handles success and failures for enabling RTT responder
      * mode.
      */
-    private static class RttResponderCallback extends ResponderCallback {
+/*    private static class RttResponderCallback extends ResponderCallback {
         private static final String TAG = "WifiRtt";
 
         // A monotonic increasing counter for responder callback ids.
@@ -166,7 +166,7 @@ public class WifiRttManagerFacade extends RpcReceiver {
     public RttCapabilities wifiRttGetCapabilities() {
         return mRtt.getRttCapabilities();
     }
-
+*/
     private RttParams parseRttParam(JSONObject j) throws JSONException {
         RttParams result = new RttParams();
         if (j.has("deviceType")) {
@@ -184,7 +184,7 @@ public class WifiRttManagerFacade extends RpcReceiver {
         if (j.has("channelWidth")) {
             result.channelWidth = j.getInt("channelWidth");
         }
-        if (j.has("centerFreq0")) {
+        /*if (j.has("centerFreq0")) {
             result.centerFreq0 = j.getInt("centerFreq0");
         }
         if (j.has("centerFreq1")) {
@@ -220,7 +220,7 @@ public class WifiRttManagerFacade extends RpcReceiver {
         }
         if (j.has("bandwidth")) {
             result.bandwidth = j.getInt("bandwidth");
-        }
+        }*/
         return result;
     }
 
@@ -255,23 +255,23 @@ public class WifiRttManagerFacade extends RpcReceiver {
      * Enable WiFi RTT responder role. Returns the id associated with the {@link ResponderCallback}
      * used for enabling responder.
      */
-    @Rpc(description = "Enable responder", returns = "Id of the callback associated with enabling")
+/*    @Rpc(description = "Enable responder", returns = "Id of the callback associated with enabling")
     public Integer wifiRttEnableResponder() {
         RttResponderCallback callback = new RttResponderCallback(mEventFacade);
         mResponderCallbacks.put(callback.mId, callback);
         mRtt.enableResponder(callback);
         return callback.mId;
     }
-
+*/
     /**
      * Disable WiFi RTT responder role for the {@link ResponderCallback} identified by the given
      * {@code index}.
      */
-    @Rpc(description = "Disable responder")
+/*    @Rpc(description = "Disable responder")
     public void wifiRttDisableResponder(@RpcParameter(name = "index") Integer index) {
         mRtt.disableResponder(mResponderCallbacks.remove(index));
     }
-
+*/
     @Override
     public void shutdown() {
         ArrayList<Integer> keys = new ArrayList<Integer>(
@@ -279,8 +279,9 @@ public class WifiRttManagerFacade extends RpcReceiver {
         for (int k : keys) {
             wifiRttStopRanging(k);
         }
+        /*
         for (int index : mResponderCallbacks.keySet()) {
             wifiRttDisableResponder(index);
-        }
+        }*/
     }
 }
