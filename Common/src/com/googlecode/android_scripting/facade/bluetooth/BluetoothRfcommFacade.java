@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -173,8 +174,26 @@ public class BluetoothRfcommFacade extends RpcReceiver {
     // Register a broadcast receiver to bypass manual confirmation
     IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_PAIRING_REQUEST);
     mService.registerReceiver(mPairingReceiver, filter);
-
-    BluetoothSocket mSocket = mServerSocket.accept(timeout.intValue());
+    BluetoothSocket mSocket = null;
+      long time = System.currentTimeMillis() + timeout.intValue()*1000;
+    while(System.currentTimeMillis() < time) {
+      try {
+        mSocket = mServerSocket.accept(1000);
+      } catch (SocketTimeoutException e) {
+          Log.d("SocketTimeoutException: " + e.getMessage());
+          continue;
+      } catch (IOException e) {
+        String message = e.getMessage();
+          Log.d("IOException: " + message);
+          if (message != null && message.equals("Try again")) {
+            continue;
+          }
+          throw e;
+      }
+    }
+      if (mSocket == null && System.currentTimeMillis() >= time) {
+          throw new IOException("time out");
+      }
     BluetoothConnection conn = new BluetoothConnection(mSocket, mServerSocket);
     mService.unregisterReceiver(mPairingReceiver);
     mCurrentSocket = mSocket;
